@@ -6,6 +6,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -164,6 +166,77 @@ public class VideoPlayerFragment extends Fragment{
             }
         });
 
+        myPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener()
+        {
+            // @Override
+            public void onCompletion(MediaPlayer arg0)
+            {
+                if(!isOther) {
+                    myPlayer.reset();
+                    if (curVideo <= listNum - 2) {
+                        // next song
+                        curVideo++;
+
+                        try {
+//                            if (!isOther)
+//                                audioListen.pathChange(nameList.get(curMusic), pathList.get(curMusic));
+//                            if (nameList != null) musicName.setText(nameList.get(curMusic));
+//                            if (pathList != null) myPlayer.setDataSource(pathList.get(curMusic));
+//                            myPlayer.prepare();
+//                            myPlayer.start();
+//                            changedListener.hasChanged(true);
+                            if (!isOther) { videoListen.pathChange(nameList.get(curVideo), pathList.get(curVideo)); }
+                            myPlayer.setDataSource(pathList.get(curVideo));
+                            myPlayer.prepareAsync();
+                            myPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mediaPlayer) {
+                                    mediaPlayer.start();
+                                    btnPlay.setVisibility(View.GONE);
+                                    btnPause.setVisibility(View.VISIBLE);
+                                }
+                            });
+
+                        } catch (IllegalArgumentException e) {
+                            e.printStackTrace();
+                        } catch (IllegalStateException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        // restart to play the list
+                        curVideo = 0;
+
+                        try {
+//                            if (!isOther)
+//                                audioListen.pathChange(nameList.get(curMusic), pathList.get(curMusic));
+//                            if (nameList != null) musicName.setText(nameList.get(curMusic));
+//                            if (pathList != null) myPlayer.setDataSource(pathList.get(curMusic));
+                            if (!isOther) { videoListen.pathChange(nameList.get(curVideo), pathList.get(curVideo)); }
+                            myPlayer.setDataSource(pathList.get(curVideo));
+                            myPlayer.prepareAsync();
+                            myPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                @Override
+                                public void onPrepared(MediaPlayer mediaPlayer) {
+                                    mediaPlayer.start();
+                                    btnPlay.setVisibility(View.GONE);
+                                    btnPause.setVisibility(View.VISIBLE);
+                                }
+                            });
+//                            changedListener.hasChanged(true);
+                        } catch (IllegalArgumentException e) {
+                            e.printStackTrace();
+                        } catch (IllegalStateException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
+
         // set up timer and time bar
         timeHandler();
         timeBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -208,12 +281,17 @@ public class VideoPlayerFragment extends Fragment{
             public void surfaceCreated(SurfaceHolder holder) {
                 Log.d(TAG, "surfaceCreated");
 
+                myPlayer.release();
+                myPlayer = null;
+
                 if (!isOther) {
                     try {
+
                         videoListen.pathChange(nameList.get(curVideo), pathList.get(curVideo));
                         Log.i(" isLocal path ", pathList.get(curVideo));
                         String path = pathList.get(curVideo);
                         final File file = new File(path);
+
 
                         if (file.exists()) {
                             FileInputStream is = new FileInputStream(file);
@@ -286,10 +364,33 @@ public class VideoPlayerFragment extends Fragment{
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if( keyCode == KeyEvent.KEYCODE_BACK ){
                     // back to previous fragment by tag
-                    ((MainActivity)getActivity()).delService();
+                    if(!isOther){
+                        ((MainActivity)getActivity()).delService();
+                    }
                     myPlayer.stop();
-                    myPlayer.reset();
-                    getActivity().getSupportFragmentManager().popBackStack();
+
+                    FragmentManager ffg = getActivity().getSupportFragmentManager();
+                    FragmentTransaction ft = ffg.beginTransaction();
+                    Fragment fg = ffg.findFragmentByTag("VideoPlayer");
+                    ft.remove(fg);
+                    ffg.popBackStack();
+                    ft.commit();
+//                    getActivity().getSupportFragmentManager().popBackStack();
+//                    myPlayer.stop();
+
+//                    Fragment fg = getActivity().getSupportFragmentManager().findFragmentByTag("VideoPlayer");
+//                    getActivity().getSupportFragmentManager().beginTransaction().remove(fg);
+//                    getActivity().getSupportFragmentManager().popBackStack();
+//                    getActivity().getSupportFragmentManager().beginTransaction().commit();
+
+//                    FragmentManager ffg = getActivity().getSupportFragmentManager();
+//                    FragmentTransaction ft = ffg.beginTransaction();
+//                    Fragment fg = ffg.findFragmentByTag("VedioPlayer");
+//                    ft.remove(fg);
+//                    ffg.popBackStack();
+//                    ft.commit();
+
+
                     Log.d("AudioFG--"," back success");
                     return true;
                 }

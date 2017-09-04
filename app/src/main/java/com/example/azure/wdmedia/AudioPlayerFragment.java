@@ -13,6 +13,8 @@ import android.net.wifi.p2p.nsd.WifiP2pDnsSdServiceRequest;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -238,6 +240,8 @@ public class AudioPlayerFragment extends Fragment implements SyncClient.ChangeLi
         musicName = (TextView) mContentView.findViewById(R.id.musicName);
         timeBar.setProgress(0);
 
+        myPlayer.release();
+        myPlayer = null;
 
         if(!isOther) {
             try {
@@ -250,6 +254,7 @@ public class AudioPlayerFragment extends Fragment implements SyncClient.ChangeLi
                 musicName.setText(nameList.get(curMusic));
 
                 if (file.exists()) {
+
                     if (myPlayer == null) {
                         myPlayer = new MediaPlayer();
                     }
@@ -257,7 +262,6 @@ public class AudioPlayerFragment extends Fragment implements SyncClient.ChangeLi
                     FileInputStream is = new FileInputStream(file);
                     FileDescriptor fd = is.getFD();
                     myPlayer.setDataSource(fd);
-                    myPlayer.prepareAsync();
                     myPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
                         @Override
                         public void onPrepared(MediaPlayer mediaPlayer) {
@@ -267,11 +271,31 @@ public class AudioPlayerFragment extends Fragment implements SyncClient.ChangeLi
                             mediaPlayer.start();
                         }
                     });
+                    try {
+                        myPlayer.prepareAsync();
+                    } catch(IllegalStateException ee)
+                    {
+                        myPlayer.reset();
+                        myPlayer.setDataSource(fd);
+                        myPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                            @Override
+                            public void onPrepared(MediaPlayer mediaPlayer) {
+                                Log.d("MediaPlayer ","---123onPrepared---");
+                                setContentView(View.VISIBLE);
+
+                                mediaPlayer.start();
+                            }
+                        });
+                        myPlayer.prepareAsync();
+                        ee.printStackTrace();
+                    }
+
                     is.close();
                 } else {
                     throw new IOException("setDataSource failed.");
                 }
-            } catch (IOException e) {
+            }
+            catch (IOException e) {
                 Log.i("Read file", "~~~failed~~~");
                 e.printStackTrace();
             }
@@ -544,11 +568,14 @@ public class AudioPlayerFragment extends Fragment implements SyncClient.ChangeLi
 //                         audioListen.stopLink();
                       }
                       myPlayer.stop();
+                      FragmentManager ffg = getActivity().getSupportFragmentManager();
+                      FragmentTransaction ft = ffg.beginTransaction();
+                      Fragment fg = ffg.findFragmentByTag("AudioPlayer");
+                      ft.remove(fg);
+                      ffg.popBackStack();
+                      ft.commit();
 
-                      Fragment fg = getActivity().getSupportFragmentManager().findFragmentByTag("AudioPlayer");
-                      getActivity().getSupportFragmentManager().beginTransaction().remove(fg);
-                      getActivity().getSupportFragmentManager().popBackStack();
-                      getActivity().getSupportFragmentManager().beginTransaction().commit();
+
                       Log.d("AudioFG--"," back success");
                       return true;
                   }

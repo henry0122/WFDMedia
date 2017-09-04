@@ -36,8 +36,11 @@ public class SyncServer implements Runnable , AudioPlayerFragment.HasChangedList
         {
             if(isProvider)
             {
+
                 syncServerSocket = new ServerSocket(syncPort);
+
                 while (true) {
+                    System.out.println("Fuckin close or not: " + syncServerSocket.isClosed());
                     Socket acceptSocket = syncServerSocket.accept();
                     System.out.println("ServerSocket accept in SyncServer's run().");
 
