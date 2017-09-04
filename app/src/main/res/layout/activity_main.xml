@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.azure.wdmedia.MainActivity">
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id = "@+id/frameLayout">
+    </FrameLayout>
+    <!--<fragment-->
+        <!--android:id="@+id/frag_Source"-->
+        <!--android:name="com.example.azure.wdmedia.SetSourceFragment"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_weight="1"-->
+        <!--tools:layout="@layout/fragment_set_source">-->
+        <!--&lt;!&ndash; Preview: layout=@layout/row_devices &ndash;&gt;-->
+    <!--</fragment>-->
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@android:id/list">
+
+    </ListView>
+
+    <LinearLayout
+        android:id="@android:id/empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="no service now" >
+        </TextView>
+
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/refresh_layout">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.azure.wdmedia.SetSourceFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background3"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="key in user name"
+            android:visibility="visible"/>
+
+        <Button
+            android:id="@+id/btn_OK"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:fontFamily="casual"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:text="OK"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</FrameLayout>

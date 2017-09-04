@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.azure.wdmedia.ChoosingMediaFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background3"
+        android:gravity="center"
+        android:padding="15dp"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_audio"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="200dp"
+            android:fontFamily="casual"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:text="@string/Audio"
+            android:textSize="35sp"/>
+
+        <Button
+            android:layout_marginTop="10dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btn_video"
+            android:layout_width="200dp"
+            android:fontFamily="casual"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:text="@string/Video"
+            android:textSize="35sp"/>
+
+        <Button
+            android:layout_marginTop="10dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btn_live"
+            android:layout_width="200dp"
+            android:fontFamily="casual"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:text="@string/Live"
+            android:textSize="35sp"/>
+    </LinearLayout>
+
+</FrameLayout>

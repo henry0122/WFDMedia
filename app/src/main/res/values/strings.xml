@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WDMedia</string>
+
+    <!--SetSourceFragment-->
+    <string name="localSource">Self</string>
+    <string name="globalSource">Others</string>
+
+    <!--GroupChooseFragment-->
+    <string name="OwnGroup">Create Group</string>
+    <string name="OthersGroup">Join Group</string>
+
+    <!--ChoosingMediaFragment-->
+    <string name="Audio">Audio</string>
+    <string name="Video">Video</string>
+    <string name="Live">Live</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
