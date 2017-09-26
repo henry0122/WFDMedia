@@ -13,13 +13,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import net.sourceforge.zbar.Config;
-import net.sourceforge.zbar.Image;
-import net.sourceforge.zbar.ImageScanner;
-import net.sourceforge.zbar.Symbol;
-import net.sourceforge.zbar.SymbolSet;
+import com.yanzhenjie.zbar.Config;
+import com.yanzhenjie.zbar.Image;
+import com.yanzhenjie.zbar.ImageScanner;
+import com.yanzhenjie.zbar.Symbol;
+import com.yanzhenjie.zbar.SymbolSet;
 
-//import me.dm7.barcodescanner.core.CameraPreview;
+
 
 public class BarcodeScanner extends AppCompatActivity {
 
