@@ -40,6 +40,7 @@ public class SetSourceFragment extends Fragment {
     private String mParam2;
     private Button btnOther;
     private Button btnOwn;
+    private Button btnQR;
     private View mContentView = null;
     private FragmentManager Mgr;
     private FragmentTransaction trans;
@@ -70,6 +71,7 @@ public class SetSourceFragment extends Fragment {
 
         btnOther = (Button) mContentView.findViewById(R.id.btn_other);
         btnOwn = (Button) mContentView.findViewById(R.id.btn_own);
+        btnQR = (Button) mContentView.findViewById(R.id.btn_QR);
 
         btnOther.setOnClickListener(
                 new View.OnClickListener() {
@@ -102,6 +104,22 @@ public class SetSourceFragment extends Fragment {
                         sourceListener.btnSelfListener();
                     }
                 });
+
+        btnQR.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+//                        if(((MainActivity)getActivity()).lockuntilconnect() == true) {
+//                            ChoosingMediaFragment mediaFrag = new ChoosingMediaFragment();
+//                            Fragment fg = Mgr.findFragmentByTag("SetSource");
+//                            trans.remove(fg).add(R.id.frameLayout, mediaFrag, "ChooseMedia");
+//                            trans.addToBackStack("ChooseMedia");
+//                            trans.commit();
+//                        }
+                        sourceListener.btnQrListener();
+                    }
+                });
+
         mContentView.setFocusableInTouchMode(true);
         mContentView.requestFocus();
 
@@ -163,6 +181,8 @@ public class SetSourceFragment extends Fragment {
         void btnSelfListener();
 
         void btnOtherListener();
+
+        void btnQrListener();
 
     }
 }

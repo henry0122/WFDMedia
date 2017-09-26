@@ -481,6 +481,7 @@ public class MainActivity extends AppCompatActivity implements WiFiDirectService
             GroupChooseFragment.GroupChooseListener,
             WiFiDirectServicesList.WifiServiceListener,
             SetSourceFragment.SourceListener,
+            QRcodeFragment.QRListener,
             ServiceList.ServiceListListener,
             ChoosingMediaFragment.MediaListener {
 
@@ -490,6 +491,7 @@ public class MainActivity extends AppCompatActivity implements WiFiDirectService
         private KeyInUsernameFragment keyInUsernameFragment;
         private GroupChooseFragment groupChooseFragment;
         private SetSourceFragment setSourceFragment;
+        private QRcodeFragment qRcodeFragment;
         private WiFiDirectServicesList wiFiDirectServicesList;
         private ServiceList serviceList;
         private ChoosingMediaFragment choosingMediaFragment;
@@ -600,6 +602,31 @@ public class MainActivity extends AppCompatActivity implements WiFiDirectService
                 Trans.addToBackStack(null);
                 Trans.commit();
             }
+        }
+
+        @Override
+        public void btnQrListener() {
+            if(lockuntilconnect() == true) {
+                qRcodeFragment = new QRcodeFragment();
+                qRcodeFragment.setOnQRListener(this);
+                Fragment fg = Mgr.findFragmentByTag("SetSource");
+                Trans = Mgr.beginTransaction();
+                Trans.remove(fg).add(R.id.frameLayout, qRcodeFragment, "QRcode");
+                Trans.addToBackStack("QRcode");
+                Trans.commit();
+            }
+        }
+
+        @Override
+        public void btnQRsendListener()
+        {
+
+        }
+
+        @Override
+        public void btnQRreceiveListener()
+        {
+
         }
 
         @Override

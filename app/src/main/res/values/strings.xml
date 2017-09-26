@@ -5,6 +5,7 @@
     <!--SetSourceFragment-->
     <string name="localSource">Self</string>
     <string name="globalSource">Others</string>
+    <string name="QRcodeSource">QRcode</string>
 
     <!--GroupChooseFragment-->
     <string name="OwnGroup">Create Group</string>
@@ -14,6 +15,10 @@
     <string name="Audio">Audio</string>
     <string name="Video">Video</string>
     <string name="Live">Live</string>
+
+    <!--QRcodeFragment-->
+    <string name="Own">Send</string>
+    <string name="Other">Receive</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
